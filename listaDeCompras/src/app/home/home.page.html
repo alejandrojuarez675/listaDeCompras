@@ -2,10 +2,16 @@
   <ion-toolbar>
     <ion-title>
       Lista de compras
+      <ion-icon name="add" (click)="onAdd()" class="pull-right"></ion-icon>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  hello world!
+
+  <div *ngFor="let item of lista">
+    {{item.codigo + ' - ' + item.descripcion}}
+    <ion-icon name="close" class="pull-right" (click)="onDelete(item.codigo)"></ion-icon>
+  </div>
+
 </ion-content>

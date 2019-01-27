@@ -8,10 +8,21 @@
 </ion-header>
 
 <ion-content padding>
-
   <div *ngFor="let item of lista">
-    {{item.codigo + ' - ' + item.descripcion}}
-    <ion-icon name="close" class="pull-right" (click)="onDelete(item.codigo)"></ion-icon>
+    <ion-card>
+      <ion-card-content>
+        <div class="capitalize">
+          {{item.codigo + ' - ' + item.descripcion}}
+          <ion-icon name="close" class="pull-right" (click)="onDelete(item.codigo)"></ion-icon>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </div>
-
 </ion-content>
+
+<ion-footer>
+  <div class="footer">
+    Esta app fue realizada por Alejandro Juarez y se encuentra subida al siguiente 
+    <a href="https://github.com/alejandrojuarez675/listaDeCompras">link</a> por consultas se puede escribir al <a href="mailto: alejandrojuarez675@gmail.com">email</a> 
+  </div>
+</ion-footer>

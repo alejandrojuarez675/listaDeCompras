@@ -13,26 +13,28 @@ export class HomePage {
   lista: Item[] = new Array;
 
   constructor(
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private dialogs: Dialogs,
     private storage: Storage
-    ) {
-      this.storage.keys().then( keys =>{
-        keys.forEach( k => {
-          this.storage.get(k).then( item => {
-            this.lista.push(item);
-          });
+  ) {
+    this.storage.keys().then(keys => {
+      keys.forEach(k => {
+        this.storage.get(k).then(item => {
+          this.lista.push(item);
         });
-      }).catch( x => {
-        this.lista = new Array;
       });
+    }).catch(x => {
+      this.lista = new Array;
+    });
   }
 
   onAdd() {
-    this.dialogs.prompt("Que desea agregar?", "Add", [], "").then(dat => {
-      let itemAux = new Item((this.lista.length + 1), dat.input1);
-      this.lista.push(itemAux);
-      this.storage.set(itemAux.codigo.toString(), itemAux);
+    this.dialogs.prompt("Que desea agregar?").then(dat => {
+      if (dat.input1 != undefined && dat.input1 != null && dat.input1.trim().length != 0) {
+        let itemAux = new Item((this.lista.length + 1), dat.input1);
+        this.lista.push(itemAux);
+        this.storage.set(itemAux.codigo.toString(), itemAux);
+      }
     }).catch(e => console.log('Error displaying dialog', e));
 
   }
@@ -51,7 +53,6 @@ export class HomePage {
     });
     this.lista = listaAux;
   }
-
 }
 
 export class Item {
